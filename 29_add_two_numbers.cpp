@@ -24,18 +24,12 @@
 Node *addTwoNumbers(Node *p1, Node *p2)
 {
     
-    Node*head=NULL;
-    Node*p=NULL;
-    int s=0;
-     if(p1!=NULL){s+=p1->data;p1=p1->next;}
-     if(p2!=NULL){s+=p2->data;p2=p2->next;}
-     Node *create=new Node(s%10);
-     head=create;
-     p=head; 
-    int carry=s/10;
-    while(p1!=NULL || p2!=NULL)
+    Node*dummy=new Node();
+    Node*p=dummy;
+    int carry=0;
+    while(p1!=NULL || p2!=NULL || carry)
     {
-        s=0;
+        int s=0;
         if(p1!=NULL){s+=p1->data;p1=p1->next;}
         if(p2!=NULL){s+=p2->data;p2=p2->next;}
         s+=carry;
@@ -46,12 +40,6 @@ Node *addTwoNumbers(Node *p1, Node *p2)
         p=create;
         carry=s/10;
     }
-    if(carry!=0)
-    {
-        Node*create=new Node(carry);
-        p->next=create;
-        p=create;
-    }
-    return head;
+   
+    return dummy->next;
 }
-ff
