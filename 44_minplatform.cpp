@@ -1,3 +1,5 @@
+#include<bits/stdc++.h>
+using namespace std;
 int calculateMinPatforms(int at[], int dt[], int n) {
 
     sort(at,at+n);
