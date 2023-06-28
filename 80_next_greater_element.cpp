@@ -2,7 +2,7 @@
 using namespace std;
 
 vector<int> nextGreater(vector<int> &arr, int n) {
-    vector<int>ans(n,0);
+    vector<int>ans(n,-1);
     stack<int>st;
     for(int i=0;i<n;i++)
     {
@@ -15,11 +15,6 @@ vector<int> nextGreater(vector<int> &arr, int n) {
            }
            st.push(i);
         }
-    }
-    while(st.size()!=0)
-    {
-        ans[st.top()]=-1;
-        st.pop();
     }
     return ans;
 }
