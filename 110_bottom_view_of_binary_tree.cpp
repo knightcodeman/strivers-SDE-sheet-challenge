@@ -1,33 +1,52 @@
 #include <bits/stdc++.h> 
-/************************************************************
+using namespace std;
+/*************************************************************
+ 
+    Following is the Binary Tree node structure.
 
-    Following is the TreeNode class structure
-
-    template <typename T>
-    class TreeNode {
-       public:
+    class BinaryTreeNode 
+    {
+    public : 
         T data;
-        TreeNode<T> *left;
-        TreeNode<T> *right;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
 
-        TreeNode(T data) {
-            this->data = data;
+        BinaryTreeNode(T data) {
+            this -> data = data;
             left = NULL;
             right = NULL;
         }
     };
 
-************************************************************/
-void helper(TreeNode<int>*root,int level, vector<int>&res)
+*************************************************************/
+void helper(BinaryTreeNode<int>*root,map<int,pair<int,int>>&mp,int x,int y)
 {
     if(root==NULL)return;
-    if(level>res.size())res.push_back(root->data);
-    helper(root->left,level+1,res);
-    helper(root->right,level+1,res);
+    if(mp.find(x)!=mp.end())
+    {
+        if(y>=mp[x].first)
+        {
+           mp[x].first=y;
+           mp[x].second=root->data;
+        }
+    }
+    else{
+        mp[x]={y,root->data};
+    }
+    helper(root->left,mp,x-1,y+1);
+     helper(root->right,mp,x+1,y+1);
 }
-vector<int> getLeftView(TreeNode<int> *root)
-{
-    vector<int>ans;
-    helper(root,1,ans);
-    return ans;
+
+vector<int> bottomView(BinaryTreeNode<int> * root){
+        map<int,pair<int,int>>mp;
+        vector<int>ans;
+
+        helper(root,mp,0,0);
+        
+        for(auto it : mp) {
+            ans.push_back(it.second.second); 
+        }
+        return ans;  
 }
+
+
